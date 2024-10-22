@@ -11,12 +11,17 @@
 // use 'extends' to make copies
 
 
-Bacteria guy = new Bacteria();
+Bacteria guy = new Bacteria(); //main
+Bacteria[] bacCopies = new Bacteria[100]; //array of copies
 
+Coin[] coins = new Coin[10];
 
 void setup() {
   size(600, 800);
   background(0);
+  for(int i = 0; i < coins.length; i++){
+    coins[i] = new Coin(i); 
+  }
 }
 
 void draw() {
@@ -24,18 +29,22 @@ void draw() {
   noStroke();
   fill(0);
   rect(0, 0, 600, 600);
+  for(Coin i : coins){
+    i.show(); 
+  }
   guy.show();
   guy.walk();
+
 }
 
-class Bacteria {
+class Bacteria { //Main guy that is controlled
   int bacX, bacY;
   int speed, size, pickupRange;
   Bacteria() {
     bacX = 300;
     bacY = 300;
     //starting stats
-    speed = 3;
+    speed = 5; 
     size = 10;
     pickupRange = 5;
   }
@@ -46,8 +55,44 @@ class Bacteria {
   }
 
   void walk() {
-    bacX += (int)(Math.random()*speed)-1;
-    bacY += (int)(Math.random()*speed)-1;
+    //biased walking
+    if (mouseX > bacX) {
+      bacX += (int)(Math.random()*speed)-1;
+    } else {
+      bacX -= (int)(Math.random()*speed)-1;
+    }
+    if (mouseY > bacY) {
+      bacY += (int)(Math.random()*speed)-1;
+    } else {
+      bacY -= (int)(Math.random()*speed)-1;
+    }
+
+    //limit how far it goes
+    if (bacY >= 600) {
+      bacY = 600;
+    }
+  }
+}
+
+class Coin { //coins to collect
+  int x, y;
+  int coinIndex;
+  Coin(int argIndex) {
+    x = (int)(Math.random()*600);
+    y = (int)(Math.random()*600);
+    coinIndex = argIndex;
+  }
+  void show() {
+    fill(#C9AB00);
+    ellipse(x, y, 20, 25);
+    fill(#F0E802);
+    ellipse(x-4, y, 20, 25);
+  }
+  void checkCollision(int argX, int argY) {
+    if(dist(x, y, argX, argY) < 10) { //if bacteria is close enough to coin
+      
+    }
+    
   }
 }
 
