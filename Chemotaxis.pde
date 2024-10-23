@@ -4,23 +4,25 @@
 /* overloaded constructor
  constructors with different parameters
  use get() for checking collisions
- */
-
-//make a game with upgrades
+*/
 
 // use 'extends' to make copies
 
+//add a timer that delays the coin spawns
+
 
 Bacteria guy = new Bacteria(); //main
-Bacteria[] bacCopies = new Bacteria[100]; //array of copies
+ArrayList <Bacteria> bacCopies; //array of copies
 
-Coin[] coins = new Coin[10];
+ArrayList <Coin> coins = new ArrayList <Coin>();
+
+int coinCount = 0;
 
 void setup() {
   size(600, 800);
   background(0);
-  for(int i = 0; i < coins.length; i++){
-    coins[i] = new Coin(i); 
+  for(int i = 0; i < 5; i++){
+    coins.add(new Coin(i));
   }
 }
 
@@ -29,9 +31,11 @@ void draw() {
   noStroke();
   fill(0);
   rect(0, 0, 600, 600);
-  for(Coin i : coins){
-    i.show(); 
+  for(int i = 0; i < coins.size(); i++){
+    coins.get(i).show();
+    coins.get(i).checkCollision(guy.bacX, guy.bacY);
   }
+  //System.out.println(coins);
   guy.show();
   guy.walk();
 
@@ -76,11 +80,11 @@ class Bacteria { //Main guy that is controlled
 
 class Coin { //coins to collect
   int x, y;
-  int coinIndex;
-  Coin(int argIndex) {
+  int index;
+  Coin(int index) {
     x = (int)(Math.random()*600);
     y = (int)(Math.random()*600);
-    coinIndex = argIndex;
+    this.index = index;
   }
   void show() {
     fill(#C9AB00);
@@ -89,14 +93,20 @@ class Coin { //coins to collect
     ellipse(x-4, y, 20, 25);
   }
   void checkCollision(int argX, int argY) {
-    if(dist(x, y, argX, argY) < 10) { //if bacteria is close enough to coin
-      
+    if(dist(x, y, argX, argY) < 12) { //if bacteria is close enough to coin
+      if(index >= coins.size()) {
+        index--;
+      }
+      coins.set(index, new Coin(index)); //replace the collided coin with a new one in a random spot
+      coinCount++; //add to coin count
+      System.out.println(coins);
     }
-    
   }
 }
 
 void uiElements() {
   fill(255, 255, 255);
   rect(0, 600, 600, 200);
+  fill(0);
+  text("Coins: " + coinCount, 10, 620);
 }
