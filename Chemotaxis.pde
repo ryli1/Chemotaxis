@@ -201,6 +201,7 @@ class Button {
         coins.add(new Coin(coins.size())); //add a new coin in a new spot
       }
       coinCount -= cost;
+      cost++;
     }
   }
 }
@@ -242,7 +243,8 @@ class CopyButton extends Button {
         //Create a new copy with the same stats as the first copy
         bacCopies.add(new BacteriaCopy(bacCopies.get(0).speed, bacCopies.get(0).size, bacCopies.get(0).pickupRange));
       }
-      coinCount -= cost;
+      coinCount -= cost;  
+      cost++;
     }
   }
 }
@@ -264,16 +266,16 @@ void uiElements() {
   stroke(0);
   textSize(12);
   text("Upgrade Speed", 60, 645);
-  speedButton = new Button(55, 650, "Speed", 5);
+  speedButton = new Button(55, 650, "Speed", 3);
 
   text("Upgrade Size", 230, 645);
-  sizeButton = new Button(225, 650, "Size", 2);
+  sizeButton = new Button(225, 650, "Size", 3);
 
   text("Increase Amount of Coins", 400, 645);
   coinButton = new Button(395, 650, "Coin", 3);
 
   text("Upgrade Speed of Clones", 60, 735);
-  copySpeedButton = new CopyButton(55, 740, "Speed", 1);
+  copySpeedButton = new CopyButton(55, 740, "Speed", 2);
 
   text("Upgrade Size of Clones", 230, 735);
   copySizeButton = new CopyButton(225, 740, "Size", 2);
