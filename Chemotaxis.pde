@@ -44,7 +44,7 @@ void draw() {
 
 class Bacteria { //Main guy that is controlled
   int bacX, bacY;
-  int speed, size, pickupRange;
+  int speed, sizes, pickupRange;
   color bacColor;
   Bacteria() {
     bacX = 300;
@@ -52,13 +52,13 @@ class Bacteria { //Main guy that is controlled
     bacColor = 255;
     //starting stats
     speed = 7; //do odd number so it can be split evenly
-    size = 15;
+    sizes = 15;
     pickupRange = 20;
   }
 
   void show() {
     fill(bacColor);
-    ellipse(bacX, bacY, size, size);
+    ellipse(bacX, bacY, sizes, sizes);
   }
 
   void walk() {
@@ -82,9 +82,9 @@ class Bacteria { //Main guy that is controlled
 }
 
 class BacteriaCopy extends Bacteria {
-  BacteriaCopy(int speed, int size, int pickupRange) {
+  BacteriaCopy(int speed, int sizes, int pickupRange) {
     this.speed = speed; //do odd number so it can be split evenly
-    this.size = size;
+    this.sizes = sizes;
     this.pickupRange = pickupRange;
     bacX = guy.bacX;
     bacY = guy.bacY;
@@ -193,7 +193,7 @@ class Button {
       }
       if (buttonType == "Size") {
         guy.pickupRange += 1;
-        guy.size += 2;
+        guy.sizes += 2;
       }
       if (buttonType == "Coin") {
         coins.add(new Coin(coins.size())); //add a new coin in a new spot
@@ -234,12 +234,12 @@ class CopyButton extends Button {
       if (buttonType == "Size") {
         for (int i = 0; i < bacCopies.size(); i++) {
           bacCopies.get(i).pickupRange += 1;
-          bacCopies.get(i).size += 2;
+          bacCopies.get(i).sizes += 2;
         }
       }
       if (buttonType == "Copy") {
         //Create a new copy with the same stats as the first copy
-        bacCopies.add(new BacteriaCopy(bacCopies.get(0).speed, bacCopies.get(0).size, bacCopies.get(0).pickupRange));
+        bacCopies.add(new BacteriaCopy(bacCopies.get(0).speed, bacCopies.get(0).sizes, bacCopies.get(0).pickupRange));
       }
       coinCount -= cost;
     }
