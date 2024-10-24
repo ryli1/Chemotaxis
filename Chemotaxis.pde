@@ -91,8 +91,9 @@ class BacteriaCopy extends Bacteria {
   }
   void walk() {
     //unbiased walking
-    bacX += (int)(Math.random()*speed)-(speed/2);  
-    bacY += (int)(Math.random()*speed)-(speed/2);
+    bacX += (int)((Math.random()*speed)-(speed/2));  
+    
+    bacY += (int)((Math.random()*speed)-(speed/2));
 
     //limit how far it goes
     if (bacY >= 600) {
@@ -208,7 +209,6 @@ class CopyButton extends Button {
   CopyButton(int x, int y, String buttonType, int cost) {
     super(x, y, buttonType, cost);
   }
-
   void show() {
     if (mouseX < x+150 && mouseX > x && mouseY < y+50 && mouseY > y) { 
       fill(#50C13B);
@@ -229,7 +229,7 @@ class CopyButton extends Button {
     if (hovered && mousePressed && coinCount >= cost) {
       if (buttonType == "Speed") {
         for (int i = 0; i < bacCopies.size(); i++) {
-          bacCopies.get(i).speed += 2;
+          bacCopies.get(i).speed += 2; 
         }
       }
       if (buttonType == "Size") {
