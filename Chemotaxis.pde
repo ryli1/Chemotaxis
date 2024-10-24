@@ -259,6 +259,7 @@ void uiElements() {
   rect(0, 600, 600, 200);
   fill(0);
   textSize(15);
+  strokeWeight(5);
   text("Coins: " + coinCount, 10, 620);
 
   textSize(12);
