@@ -168,8 +168,8 @@ class Button {
     this.y = y;
     this.buttonType = buttonType;
     this.cost = cost;
-    checkPressed();
     show();
+    checkPressed();
   }
   void show() {
     strokeWeight(2);
