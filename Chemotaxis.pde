@@ -7,7 +7,7 @@ Bacteria guy = new Bacteria(); //main
 ArrayList <Bacteria> bacCopies = new ArrayList <Bacteria>(); //array of copies
 ArrayList <Coin> coins = new ArrayList <Coin>();
 
-int coinCount = 15;
+int coinCount = 150;
 
 void setup() {
   size(600, 800);
@@ -39,12 +39,11 @@ void draw() {
   guy.walk();
 
   uiElements();
-  
 }
 
 class Bacteria { //Main guy that is controlled
   int bacX, bacY;
-  int speed, sizes, pickupRange;
+  int speed, size, pickupRange;
   color bacColor;
   Bacteria() {
     bacX = 300;
@@ -52,13 +51,13 @@ class Bacteria { //Main guy that is controlled
     bacColor = 255;
     //starting stats
     speed = 7; //do odd number so it can be split evenly
-    sizes = 15;
+    size = 15;
     pickupRange = 20;
   }
 
   void show() {
     fill(bacColor);
-    ellipse(bacX, bacY, sizes, sizes);
+    ellipse(bacX, bacY, size, size);
   }
 
   void walk() {
@@ -82,9 +81,9 @@ class Bacteria { //Main guy that is controlled
 }
 
 class BacteriaCopy extends Bacteria {
-  BacteriaCopy(int speed, int sizes, int pickupRange) {
+  BacteriaCopy(int speed, int size, int pickupRange) {
     this.speed = speed; //do odd number so it can be split evenly
-    this.sizes = sizes;
+    this.size = size;
     this.pickupRange = pickupRange;
     bacX = guy.bacX;
     bacY = guy.bacY;
@@ -130,6 +129,8 @@ class Coin { //coins to collect
     ellipse(x, y, 15, 17.5);
     fill(#F0E802);
     ellipse(x-4, y, 15, 17.5);
+    fill(#C9AB00);
+    rect(x-5, y-4, 2, 8);
   }
   void checkCollision(int argX, int argY, int range) {
     if (dist(x, y, argX, argY) < range) { //if bacteria is close enough to coin
@@ -142,16 +143,16 @@ class Coin { //coins to collect
     }
   }
   /*void coinDelayTimer() { //Delays when the coin appears again after collecting one
-    timer--;
-    for (int i = 0; i < coins.size(); i++) {
-      if (timer <= 0 && coins.get(i).x < 0) {
-        //Move the unreachable coin to a reachable spot
-        coins.get(i).x = (int)(Math.random()*600);
-        coins.get(i).y = (int)(Math.random()*600);
-        timer = 100;
-      }
-    }
-  }*/
+   timer--;
+   for (int i = 0; i < coins.size(); i++) {
+   if (timer <= 0 && coins.get(i).x < 0) {
+   //Move the unreachable coin to a reachable spot
+   coins.get(i).x = (int)(Math.random()*600);
+   coins.get(i).y = (int)(Math.random()*600);
+   timer = 100;
+   }
+   }
+   }*/
 }
 
 
@@ -193,7 +194,7 @@ class Button {
       }
       if (buttonType == "Size") {
         guy.pickupRange += 1;
-        guy.sizes += 2;
+        guy.size += 2;
       }
       if (buttonType == "Coin") {
         coins.add(new Coin(coins.size())); //add a new coin in a new spot
@@ -234,12 +235,12 @@ class CopyButton extends Button {
       if (buttonType == "Size") {
         for (int i = 0; i < bacCopies.size(); i++) {
           bacCopies.get(i).pickupRange += 1;
-          bacCopies.get(i).sizes += 2;
+          bacCopies.get(i).size += 2;
         }
       }
       if (buttonType == "Copy") {
         //Create a new copy with the same stats as the first copy
-        bacCopies.add(new BacteriaCopy(bacCopies.get(0).speed, bacCopies.get(0).sizes, bacCopies.get(0).pickupRange));
+        bacCopies.add(new BacteriaCopy(bacCopies.get(0).speed, bacCopies.get(0).size, bacCopies.get(0).pickupRange));
       }
       coinCount -= cost;
     }
@@ -259,7 +260,6 @@ void uiElements() {
   rect(0, 600, 600, 200);
   fill(0);
   textSize(15);
-  strokeWeight(5);
   text("Coins: " + coinCount, 10, 620);
 
   textSize(12);
