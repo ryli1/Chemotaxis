@@ -261,7 +261,7 @@ void uiElements() {
   fill(0);
   textSize(15);
   text("Coins: " + coinCount, 10, 620);
-
+  stroke(0);
   textSize(12);
   text("Upgrade Speed", 60, 645);
   speedButton = new Button(55, 650, "Speed", 5);
