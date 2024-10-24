@@ -168,8 +168,8 @@ class Button {
     this.y = y;
     this.buttonType = buttonType;
     this.cost = cost;
-    show();
     checkPressed();
+    show();
   }
   void show() {
     strokeWeight(2);
@@ -201,7 +201,7 @@ class Button {
         coins.add(new Coin(coins.size())); //add a new coin in a new spot
       }
       coinCount -= cost;
-      cost++;
+      cost += 1;
     }
   }
 }
@@ -244,7 +244,7 @@ class CopyButton extends Button {
         bacCopies.add(new BacteriaCopy(bacCopies.get(0).speed, bacCopies.get(0).size, bacCopies.get(0).pickupRange));
       }
       coinCount -= cost;  
-      cost++;
+      cost += 1;
     }
   }
 }
