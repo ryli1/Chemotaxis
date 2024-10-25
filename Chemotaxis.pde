@@ -7,7 +7,7 @@ Bacteria guy = new Bacteria(); //main
 ArrayList <Bacteria> bacCopies = new ArrayList <Bacteria>(); //array of copies
 ArrayList <Coin> coins = new ArrayList <Coin>();
 
-int coinCount = 20;
+int coinCount = 15;
 
 void setup() {
   frameRate(50);
@@ -187,8 +187,8 @@ class Button {
     textSize(12);
   }
   void checkPressed() {
-    coinCount -= cost;  
     if (hovered && mousePressed && coinCount >= cost) {
+      coinCount -= cost;  
       if (buttonType == "Speed") {
         guy.speed += 2; //add 2 so the number stays odd
         arrayOfCosts[0]++;
