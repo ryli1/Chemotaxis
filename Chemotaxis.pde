@@ -7,10 +7,10 @@ Bacteria guy = new Bacteria(); //main
 ArrayList <Bacteria> bacCopies = new ArrayList <Bacteria>(); //array of copies
 ArrayList <Coin> coins = new ArrayList <Coin>();
 
-int coinCount = 15;
+int coinCount = 25;
 
 void setup() {
-  frameRate(50);
+  frameRate(100);
   size(600, 800);
   background(0);
   //noCursor();
