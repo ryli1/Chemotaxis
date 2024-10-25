@@ -10,7 +10,7 @@ ArrayList <Coin> coins = new ArrayList <Coin>();
 int coinCount = 15;
 
 void setup() {
-  frameRate(50);
+  frameRate(100);
   size(600, 800);
   background(0);
   //noCursor();
