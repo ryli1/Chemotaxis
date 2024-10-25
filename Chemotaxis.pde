@@ -92,7 +92,6 @@ class BacteriaCopy extends Bacteria {
   void walk() {
     //unbiased walking
     bacX += (int)((Math.random()*speed)-(speed/2));  
-    
     bacY += (int)((Math.random()*speed)-(speed/2));
 
     //limit how far it goes
@@ -156,8 +155,6 @@ class Coin { //coins to collect
    }*/
 }
 
-
-
 class Button {
   int x, y, cost;
   String buttonType;
@@ -192,13 +189,16 @@ class Button {
     if (hovered && mousePressed && coinCount >= cost) {
       if (buttonType == "Speed") {
         guy.speed += 2; //add 2 so the number stays odd
+        arrayOfCosts[0]++;
       }
       if (buttonType == "Size") {
         guy.pickupRange += 1;
         guy.size += 2;
+        arrayOfCosts[1]++;
       }
       if (buttonType == "Coin") {
         coins.add(new Coin(coins.size())); //add a new coin in a new spot
+        arrayOfCosts[5]++;
       }
       coinCount -= cost;
       cost += 1;
@@ -231,20 +231,23 @@ class CopyButton extends Button {
       if (buttonType == "Speed") {
         for (int i = 0; i < bacCopies.size(); i++) {
           bacCopies.get(i).speed += 2; 
+          arrayOfCosts[3]++;
         }
       }
       if (buttonType == "Size") {
         for (int i = 0; i < bacCopies.size(); i++) {
           bacCopies.get(i).pickupRange += 1;
           bacCopies.get(i).size += 2;
+          arrayOfCosts[4]++;
         }
       }
       if (buttonType == "Copy") {
         //Create a new copy with the same stats as the first copy
         bacCopies.add(new BacteriaCopy(bacCopies.get(0).speed, bacCopies.get(0).size, bacCopies.get(0).pickupRange));
+        arrayOfCosts[2]++;
       }
       coinCount -= cost;  
-      cost += 1;
+      
     }
   }
 }
@@ -257,6 +260,9 @@ CopyButton copySpeedButton;
 CopyButton copySizeButton;
 Button coinButton;
 
+int[] arrayOfCosts = {1, 2, 1, 2, 2, 3}; //0-speed cost, 1-size cost, 2-clone cost, 3-copy speed cost, 4-copy size cost, 5-coin cost
+
+
 void uiElements() {
   fill(255, 255, 255);
   rect(0, 600, 600, 200);
@@ -266,22 +272,22 @@ void uiElements() {
   stroke(0);
   textSize(12);
   text("Upgrade Speed", 60, 645);
-  speedButton = new Button(55, 650, "Speed", 3);
+  speedButton = new Button(55, 650, "Speed", arrayOfCosts[0]);
 
   text("Upgrade Size", 230, 645);
-  sizeButton = new Button(225, 650, "Size", 3);
+  sizeButton = new Button(225, 650, "Size", arrayOfCosts[1]);
 
   text("Increase Amount of Coins", 400, 645);
-  coinButton = new Button(395, 650, "Coin", 3);
+  coinButton = new Button(395, 650, "Coin", arrayOfCosts[5]);
 
   text("Upgrade Speed of Clones", 60, 735);
-  copySpeedButton = new CopyButton(55, 740, "Speed", 2);
+  copySpeedButton = new CopyButton(55, 740, "Speed", arrayOfCosts[3]);
 
   text("Upgrade Size of Clones", 230, 735);
-  copySizeButton = new CopyButton(225, 740, "Size", 2);
+  copySizeButton = new CopyButton(225, 740, "Size", arrayOfCosts[4]);
 
   text("Duplicate", 400, 735);
-  cloneButton = new CopyButton(395, 740, "Copy", 1);
+  cloneButton = new CopyButton(395, 740, "Copy", arrayOfCosts[2]);
 }
 
 
