@@ -233,7 +233,7 @@ class CopyButton extends Button {
       coinCount -= cost;  
       if (buttonType == "Speed") {
         for (int i = 0; i < bacCopies.size(); i++) {
-          bacCopies.get(i).speed += 2; 
+          bacCopies.get(i).speed += 4; 
           arrayOfCosts[3]++;
         }
       }
