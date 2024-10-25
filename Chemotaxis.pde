@@ -10,6 +10,7 @@ ArrayList <Coin> coins = new ArrayList <Coin>();
 int coinCount = 15;
 
 void setup() {
+  frameRate(50);
   size(600, 800);
   background(0);
   //noCursor();
@@ -186,21 +187,19 @@ class Button {
     textSize(12);
   }
   void checkPressed() {
+    coinCount -= cost;  
     if (hovered && mousePressed && coinCount >= cost) {
       if (buttonType == "Speed") {
         guy.speed += 2; //add 2 so the number stays odd
-        coinCount -= cost;  
         arrayOfCosts[0]++;
       }
       if (buttonType == "Size") {
         guy.pickupRange += 1;
         guy.size += 2;
-        coinCount -= cost;  
         arrayOfCosts[1]++;
       }
       if (buttonType == "Coin") {
         coins.add(new Coin(coins.size())); //add a new coin in a new spot
-        coinCount -= cost;  
         arrayOfCosts[5]++;
       }
     }
@@ -229,10 +228,10 @@ class CopyButton extends Button {
   }
   void checkPressed() {
     if (hovered && mousePressed && coinCount >= cost) {
+      coinCount -= cost;  
       if (buttonType == "Speed") {
         for (int i = 0; i < bacCopies.size(); i++) {
           bacCopies.get(i).speed += 2; 
-          coinCount -= cost;  
           arrayOfCosts[3]++;
         }
       }
@@ -240,14 +239,12 @@ class CopyButton extends Button {
         for (int i = 0; i < bacCopies.size(); i++) {
           bacCopies.get(i).pickupRange += 1;
           bacCopies.get(i).size += 2;
-          coinCount -= cost;  
           arrayOfCosts[4]++;
         }
       }
       if (buttonType == "Copy") {
         //Create a new copy with the same stats as the first copy
         bacCopies.add(new BacteriaCopy(bacCopies.get(0).speed, bacCopies.get(0).size, bacCopies.get(0).pickupRange));
-        coinCount -= cost;  
         arrayOfCosts[2]++;
       }
     }
