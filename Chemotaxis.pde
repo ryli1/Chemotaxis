@@ -201,7 +201,6 @@ class Button {
         arrayOfCosts[5]++;
       }
       coinCount -= cost;
-      cost += 1;
     }
   }
 }
