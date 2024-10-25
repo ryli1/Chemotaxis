@@ -7,10 +7,10 @@ Bacteria guy = new Bacteria(); //main
 ArrayList <Bacteria> bacCopies = new ArrayList <Bacteria>(); //array of copies
 ArrayList <Coin> coins = new ArrayList <Coin>();
 
-int coinCount = 25;
+int coinCount = 15;
 
 void setup() {
-  frameRate(100);
+  frameRate(50);
   size(600, 800);
   background(0);
   //noCursor();
@@ -171,12 +171,12 @@ class Button {
   }
   void show() {
     strokeWeight(2);
-    if (mouseX < x+150 && mouseX > x && mouseY < y+50 && mouseY > y) { 
-      fill(#F0D01B);
-      hovered = true;
-    } else {
+    if (!(mouseX < x+150 && mouseX > x && mouseY < y+50 && mouseY > y)) { 
       fill(#FFE75D);
       hovered = false;
+    } else {
+      fill(#F0D01B);
+      hovered = true;
     }
     pushMatrix();
     rect(x, y, 150, 50, 15); //width 150, height 50
@@ -188,6 +188,7 @@ class Button {
   }
   void checkPressed() {
     if (hovered && mousePressed && coinCount >= cost) {
+      hovered = false;
       coinCount -= cost;  
       if (buttonType == "Speed") {
         guy.speed += 2; //add 2 so the number stays odd
@@ -228,6 +229,7 @@ class CopyButton extends Button {
   }
   void checkPressed() {
     if (hovered && mousePressed && coinCount >= cost) {
+      hovered = false;
       coinCount -= cost;  
       if (buttonType == "Speed") {
         for (int i = 0; i < bacCopies.size(); i++) {
