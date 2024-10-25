@@ -10,7 +10,7 @@ ArrayList <Coin> coins = new ArrayList <Coin>();
 int coinCount = 15;
 
 void setup() {
-  frameRate(100);
+  frameRate(50);
   size(600, 800);
   background(0);
   //noCursor();
@@ -233,16 +233,16 @@ class CopyButton extends Button {
       coinCount -= cost;  
       if (buttonType == "Speed") {
         for (int i = 0; i < bacCopies.size(); i++) {
-          bacCopies.get(i).speed += 4; 
-          arrayOfCosts[3]++;
+          bacCopies.get(i).speed += 4;
         }
+        arrayOfCosts[3]++;
       }
       if (buttonType == "Size") {
         for (int i = 0; i < bacCopies.size(); i++) {
           bacCopies.get(i).pickupRange += 1;
           bacCopies.get(i).size += 2;
-          arrayOfCosts[4]++;
         }
+        arrayOfCosts[4]++;
       }
       if (buttonType == "Copy") {
         //Create a new copy with the same stats as the first copy
