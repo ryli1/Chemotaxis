@@ -212,12 +212,12 @@ class CopyButton extends Button {
     super(x, y, buttonType, cost);
   }
   void show() {
-    if (mouseX < x+150 && mouseX > x && mouseY < y+50 && mouseY > y) { 
-      fill(#50C13B);
-      hovered = true;
-    } else {
+    if (!(mouseX < x+150 && mouseX > x && mouseY < y+50 && mouseY > y)) { 
       fill(#75FA5B);
       hovered = false;
+    } else {
+      fill(#50C13B);
+      hovered = true;
     }
     pushMatrix();
     rect(x, y, 150, 50, 15); //width 150, height 50
